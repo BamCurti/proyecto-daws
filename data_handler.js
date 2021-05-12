@@ -2,6 +2,7 @@
 
 let mongoose = require('mongoose');
 let shortid = require('shortid');
+ 
 let mongoConnection = 'mongodb+srv://admin:admin@proyectodaws.7s7sp.mongodb.net/proyectodaws?retryWrites=true&w=majority';
 
 let Schema = mongoose.Schema;
@@ -17,6 +18,7 @@ let userSchema = new Schema({
         required: true
     },
     uid: {
+        required: true, 
         unique: true,
         type: String,
         default: shortid
@@ -41,23 +43,23 @@ let User = mongoose.model('user', userSchema);
 
 let articleSchema = new Schema({
     uid: {
+        required: true,
         unique: true,
         type: String,
         default: shortid
     },
     inStock: {
-        type: Number,
-        required: true
+        type: Number
     },
     price: {
-        type: Number,
-        required: true
+        type: Number
     },
     description: {
-        type: String,
+        required: true,
+        type: String
     },
     Tags: {
-        type: Array,
+        type: Array
     }
 }, {collection: 'articles'});
 let Article = mongoose.model('article', articleSchema);
@@ -77,6 +79,7 @@ let Cart = mongoose.model('cart', cartSchema);
 
 let billSchema = new Schema({
     uid: {
+        required: true,
         unique: true,
         type: String,
         default: shortid
@@ -119,48 +122,50 @@ let billSchema = new Schema({
 }, {collection: 'bills'});
 let Bill = mongoose.model('bill', billSchema);
 
-function createUser(userInfo) {
+async function createUser(userInfo) {
 
-    if(userInfo.name == undefined || userInfo.password == undefined || userInfo.email == undefined) return 400;
+    if(userInfo.name == undefined || userInfo.password == undefined || userInfo.email == undefined) 
+        throw TypeError('You must send user info');
 
     userInfo.uid = shortid.generate();
     userInfo.billList = [];
-    userInfo.cartId = createCart();
+    userInfo.cartId = shortid.generate();
+
+    createCart(userInfo.cartId).catch(() => {throw Error('Try again')});
 
     let user = User(userInfo);
-    user.save().then(
-        function(us) {
-            return 200;
-        }, function(err) {
-            //delete cart
-            return 401;
-        }
-    );
+    await user.save();
 }
 
-function createCart() {
+async function createCart(uid) {
     let info = {
         uid: shortid.generate(),
         content: {}
     }
     let cart = Cart(info);
-    cart.save().then((doc)=> console.log(doc));
-    return info.uid;
+    await cart.save();
 }
 
-function createArticle(articleInfo) {
+async function createArticle(articleInfo) {
     articleInfo.uid = shortid.generate();
+    if(articleInfo.inStock == undefined) articleInfo.inStock = 0;
+    if(articleInfo.price == undefined) articleInfo.price = 0;
+    if(articleInfo.tags == undefined) articleInfo.tags = [];
     
     let article = articleSchema(articleInfo);
-    article.save().then((doc)=> console.log(doc));
-    return articleInfo.uid;
+    await article.save();
 }
 
-function createBill(billInfo) {
-    userSchema.find({uid: billInfo.userId},(err, docs) => {
-        console.log(docs);
-    })
+async function createBill(billInfo) {
+    billInfo.uid = shortid.generate();
+    if(billInfo.cartId == undefined || billInfo.userId == undefined) throw SyntaxError('You must send cartId nad userId');
+    if(billInfo.state == undefined || billInfo.city == undefined || billInfo.direction == undefined
+        ||billInfo.cp == undefined || billInfo.internNumber == undefined || billInfo.externNumber == undefined)
+        throw TypeError('You must send user info');
     
+    let bill = billSchema(billInfo);
+    bill.save();
+
 }
 
 exports.createUser = createUser;
