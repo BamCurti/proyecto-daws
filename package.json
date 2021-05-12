@@ -10,11 +10,9 @@
   "author": "Edgar Vallejo Curti & Eduardo Navarro Zuloaga",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "brcypt": "^1.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "jsw": "^4.0.2",
     "jws": "^4.0.0",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.7",
