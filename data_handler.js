@@ -123,7 +123,6 @@ let billSchema = new Schema({
 let Bill = mongoose.model('bill', billSchema);
 
 async function createUser(userInfo) {
-
     if(userInfo.name == undefined || userInfo.password == undefined || userInfo.email == undefined) 
         throw TypeError('You must send user info');
 
@@ -168,4 +167,11 @@ async function createBill(billInfo) {
 
 }
 
+async function login(userInfo) {
+    const query = User.where({email: userInfo},() => {
+        console.log("Simon");
+    })
+}
+
 exports.createUser = createUser;
+exports.login = login;
