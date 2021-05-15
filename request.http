@@ -14,5 +14,6 @@ POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-    "email": "is725762@iteso.mx"
+    "email": "is725762@iteso.mx",
+    "password": "password"
 }

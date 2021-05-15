@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require('express');
-const router = require('./router.js');
+const router = require('./services/router.js');
 const app = express();
 const port = 3000;
 const cors = require('cors');
