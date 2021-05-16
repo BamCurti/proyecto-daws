@@ -7,7 +7,7 @@ const cors = require('cors');
 const config = require('./config.js');
 
 app.use(express.json());
-
+app.use(cors());
 app.use(router);
 
 app.use(express.static('public'));
