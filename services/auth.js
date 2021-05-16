@@ -3,6 +3,13 @@ const jwt = require('jwt-simple');
 const moment = require('moment');
 const config = require('../config.js');
 
+const adminPayload = {
+    EVC: "is725762",
+    ENV: "is715155"
+}
+
+const adminToken = jwt.encode(adminPayload, config.SECRET_TOKEN);
+
 function createToken(user) {
     const payload = {
         sub: user._id,
@@ -14,10 +21,10 @@ function createToken(user) {
 }
 
 function isAuth(req, res, next) {
-    if(!req.headers['X-Auth']) 
+    if(!req.headers['x-auth']){
         return res.status(403).send('No tienes autorización');
-    
-    const token = req.headers['X-Auth'].split(" ")[1];
+    }
+    const token = req.headers['x-auth'];
     const payload = jwt.decode(token, config.SECRET_TOKEN);
 
     if(payload.exp < moment().unix())
@@ -27,5 +34,21 @@ function isAuth(req, res, next) {
     next();
 }
 
+function isAdmin(req, res, next) {
+    console.log("\n" + adminToken + "\n")
+    if(!req.headers['x-admin']) 
+    return res.status(403).send('No tienes autorización');
+    
+const token = req.headers['x-admin'];
+const payload = jwt.decode(token, config.SECRET_TOKEN);
+
+if(payload.ENV == undefined || payload.EVC == undefined)
+    return res.status(403).send('No tienes autorización');
+
+console.log("Admin authorized");
+next();
+}
+
 exports.createToken = createToken;
 exports.isAuth = isAuth;
+exports.isAdmin = isAdmin;

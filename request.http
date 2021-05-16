@@ -17,3 +17,45 @@ Content-Type: application/json
     "email": "is725762@iteso.mx",
     "password": "password"
 }
+
+###
+
+GET http://localhost:3000/api/users/is725762@iteso.mx
+Content-Type: application/json
+X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjM5MzUsImV4cCI6MTYyMTIxMDMzNX0.WSzKGM5X_r76qJgKDQtL8quaXVkHZI78wO64ow6p16s
+
+###
+
+GET http://localhost:3000/api/articles
+Content-Type: application/json
+
+###
+POST http://localhost:3000/api/articles
+Content-Type: application/json
+X-Admin: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFVkMiOiJpczcyNTc2MiIsIkVOViI6ImlzNzE1MTU1In0.Y9A6bo3Nesum5EslwIC4ib8STGRVQpMB_6qA2llXc4o
+
+{
+    "inStock": 666,
+    "price": 1999,
+    "description": "Adidas Forum Low",
+    "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy/09c5ea6df1bd4be6baaaac5e003e7047_9366/Tenis_Forum_Low_Blanco_FY7756_01_standard.jpg"
+}
+
+###
+
+GET http://localhost:3000/api/cart/2LySlWp3P
+Content-Type: application/json
+X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjM5MzUsImV4cCI6MTYyMTIxMDMzNX0.WSzKGM5X_r76qJgKDQtL8quaXVkHZI78wO64ow6p16s
+
+###
+
+PUT http://localhost:3000/api/cart/2LySlWp3P
+Content-Type: application/json
+X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMTY1NzQsImV4cCI6MTYyMTIwMjk3NH0.daJYNGDY3nLhLgx52Hb2AZHyXvgyIW8gaVyvsmlcA8o
+ 
+{
+  "_id": "60a0633a9ab37251c810a965",
+  "uid": "zCiGktyPvq",
+  "content": {},
+  "__v": 0
+}

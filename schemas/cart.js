@@ -11,8 +11,8 @@ let cartSchema = new schema({
         default: shortid
     },
     content: {
-        type: Object,
-        default: {}
+        type: Map,
+        of: Number
     }
 
 }, {collection: 'carts'});

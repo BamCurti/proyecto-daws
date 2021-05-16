@@ -17,6 +17,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error'));
 db.once('open', () => console.log('DB Connected'));
 
+
 router.route('/api/users')
     .post((req, res) => {
         let info = req.body;
@@ -88,6 +89,93 @@ router.route('/api/login')
         })
     });
 
+router.route('/api/users/:email')
+    .get(auth.isAuth, (req, res) => {
+        let reqEmail = req.params.email;
+        console.log(reqEmail);
+
+        const query = User.where({email: reqEmail});
+
+        query.findOne((err, doc) => {
+            if(err) return res.status(500).send('La base de datos ha fallado');
+            if(doc == null) return res.status(404).send('El correo no está en la base de datos');
+
+            res.set('Content-Type', 'application/json');
+            res.set('X-Auth', req.headers['x-auth']);
+            res.status(200).send(JSON.stringify(doc));
+        })
+
+    });
+
+router.route('/api/articles')
+    .get((req, res) => {
+        const query = Article.find((err, doc) => {
+            if(err) return res.status(500).send('La base de datos ha fallado');
+
+            res.set('Content-Type', 'application/json');
+            res.status(200).send(JSON.stringify(doc));
+        });
+    }).post(auth.isAdmin, (req, res) => {
+        let info = req.body;
+
+        console.log(info);
+        if(info.price == undefined || info.description == undefined)
+            return res.status(403).send('Falta información obligatoria');
+
+        info.uid = shortid.generate();
+
+        if(info.inStock == undefined) info.inStock = 0;
+        if(info.tags == undefined) info.tags = [];
+        if(info.image == undefined) info.image = '';
+        
+        const article = new Article(info);
+        article.save((err, articleStored) => {
+            if(err)
+                return res.status(500).send("Error en la base de datos");
+            
+            console.log(articleStored);
+            res.set('Content-Type', 'application/json');
+            res.status(201).send('Articulo creado');
+        });
+    });
+
+router.route('/api/articles/:id')
+    .put();
+
+router.route('/api/cart/:id')
+    .get(auth.isAuth, (req, res) => {
+        //query de id
+        const queryUser = User.where({uid: req.params.id});
+        queryUser.findOne((err, doc) => {
+            //si doc == null, res = 404
+            if(err) return res.status(500).send('Error en el servidor');
+            if(doc == null) return res.status(404).send("Usuario no encontrado");
+
+            //query con el id de carrito
+            const cartId = doc.cartId;
+            const queryCart = Cart.where({uid: cartId});
+            queryCart.findOne((err, doc) => {
+                if(err) return res.status(500).send('Error en el servidor');
+                //devolver query por json y estado 200
+
+                res.set('Content-Type', 'application/json');
+                res.set('X-Auth', req.headers['x-auth']);
+                return res.status(200).send(JSON.stringify(doc));
+
+            })
+
+
+        });
+
+    })
+    .put();
+
+router.route('/api/bills/:idUser')
+    .get()
+    .post();
+
+router.route('/api/bills/bill/:id')
+    .get();
 
 
 
