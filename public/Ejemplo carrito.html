@@ -1,0 +1,342 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script>
+        window.onload = function () {
+            // Variables
+            const baseDeDatos = [
+                {
+                    id: 1,
+                    nombre: 'Air Force One Low',
+                    precio: 1999,
+                    imagen: 'patata.jpg'
+                },
+                {
+                    id: 2,
+                    nombre: 'Cebolla',
+                    precio: 1.2,
+                    imagen: 'cebolla.jpg'
+                },
+                {
+                    id: 3,
+                    nombre: 'Calabacin',
+                    precio: 2.1,
+                    imagen: 'calabacin.jpg'
+                },
+                {
+                    id: 4,
+                    nombre: 'Fresas',
+                    precio: 0.6,
+                    imagen: 'fresas.jpg'
+                }
+
+                /*{
+                    id: 1,
+                    nombre: 'Air Force One Low',
+                    precio: '1,999',
+                    imagen: 'https://images.solecollector.com/complex/images/fl_lossy,q_auto/v1/zz2dgacyy15xzzvsmvao/nike-air-force-1-white-reflective-905345-100-medial'
+                },
+                {
+                    id: 2,
+                    nombre: 'Lord Nermal UV Activated High Tops (Blue/Fuschia)',
+                    precio: '2,500',
+                    imagen: 'https://cdn.shopify.com/s/files/1/0177/2424/products/uv-high-tops_1024x1024.gif?v=1618006069'
+                },
+                {
+                    id: 3,
+                    nombre: 'Welcome To Heck Slides (Black Flame)',
+                    precio: '1,500',
+                    imagen: 'https://cdn.shopify.com/s/files/1/0177/2424/products/welcometoheckslides_0003_027A9928_1024x1024.jpg?v=1601918825'
+                },
+                {
+                    id: 4,
+                    nombre: 'Killer Acid Worldwide Black & Pink Bucket Hat',
+                    precio: '2,000',
+                    imagen: 'https://scene7.zumiez.com/is/image/zumiez/product_main_medium_2x/Killer-Acid-Worldwide-Black-%26-Pink-Bucket-Hat-_341443-front-US.jpg'
+                },
+                 {
+                    id: 5,
+                    nombre: 'Hypland x Hunter x Hunter Killua Black Bucket Hat',
+                    precio: '2,499',
+                    imagen: 'https://scene7.zumiez.com/is/image/zumiez/product_main_medium_2x/Hypland-x-Hunter-x-Hunter-Killua-Black-Bucket-Hat-_343760-front-US.jpg'
+                },
+                {
+                    id: 6,
+                    nombre: 'adidas Originals Washed Red Bucket Hat',
+                    precio: '3,000',
+                    imagen: 'https://scene7.zumiez.com/is/image/zumiez/product_main_medium_2x/adidas-Originals-Washed-Red-Bucket-Hat-_324968-front-US.jpg'
+                },
+                {
+                    id: 7,
+                    nombre: 'Odd Future Black Bucket Hat',
+                    precio: '1,500',
+                    imagen: 'https://scene7.zumiez.com/is/image/zumiez/product_main_medium_2x/Odd-Future-Black-Bucket-Hat--_319194-front-US.jpg'
+                },
+                {
+                    id: 8,
+                    nombre: 'Obey Icon Eye Black Beanie',
+                    precio: '1,700',
+                    imagen: 'https://scene7.zumiez.com/is/image/zumiez/product_main_medium_2x/Obey-Icon-Eye-Black-Beanie-_304002-front-US.jpg'
+                },
+                {
+                    id: 9,
+                    nombre: 'Santa Cruz Other Dot Silver Tie Dye Bucket Hat',
+                    precio: '2,000',
+                    imagen: 'https://scene7.zumiez.com/is/image/zumiez/product_main_medium_2x/Santa-Cruz-Other-Dot-Silver-Tie-Dye-Bucket-Hat-_329284-front-US.jpg'
+                },
+                {
+                    id: 10,
+                    nombre: 'Santa Cruz Flame Dot White Beanie',
+                    precio: '2,000',
+                    imagen: 'https://scene7.zumiez.com/is/image/zumiez/product_main_medium_2x/Santa-Cruz-Flame-Dot-White-Beanie-_338252-front-US.jpg'
+                },
+                {
+                    id: 11,
+                    nombre: 'Odd Future Black, Pink & Yellow Bucket Hat',
+                    precio: '700',
+                    imagen: 'https://scene7.zumiez.com/is/image/zumiez/product_main_medium_2x/Odd-Future-Black%2C-Pink-%26-Yellow-Bucket-Hat-_331488-front-US.jpg'
+                },
+                {
+                    id: 12,
+                    nombre: 'Obey Bold Maroon Dad Hat',
+                    precio: '1,200',
+                    imagen: 'https://scene7.zumiez.com/is/image/zumiez/product_main_medium_2x/Obey-Bold-Maroon-Dad-Hat-_332713-front-US.jpg'
+                },
+                {
+                    id: 13,
+                    nombre: 'Air Max 270 React “Travis Scott - Cactus Trails”',
+                    precio: '14,999',
+                    imagen: 'https://cdn.shopify.com/s/files/1/0433/0438/6709/products/CT2864-200_1_590x.png?v=1594793677'
+                },
+                {
+                    id: 14,
+                    nombre: 'Air Jordan 1 Retro High OG "Light Smoke Grey"',
+                    precio: '4,999',
+                    imagen: 'https://cdn.shopify.com/s/files/1/0433/0438/6709/products/555088_126_590x.png?v=1594812739'
+                },
+                {
+                    id: 15,
+                    nombre: 'Air Jordan 1 "J Balvin"',
+                    precio: '15,900',
+                    imagen: 'https://cdn.shopify.com/s/files/1/0433/0438/6709/products/Capturadepantalla2021-02-08142254_590x.png?v=1612815859'
+                },
+                {
+                    id: 16,
+                    nombre: 'Air Jordan 1 University Blue',
+                    precio: '10,900',
+                    imagen: 'https://cdn.shopify.com/s/files/1/0433/0438/6709/products/CapturadePantalla2021-03-31ala_s_14.08.54_590x.png?v=1617221370'
+                },
+                {
+                    id: 17,
+                    nombre: 'Air Max 90 - "Valentines Day" (W)',
+                    precio: '6,600',
+                    imagen: 'https://cdn.shopify.com/s/files/1/0433/0438/6709/products/Nike-Air-Max-90-Valentines-Day-2021-W_590x.jpg?v=1612667981'
+                },
+                {
+                    id: 18,
+                    nombre: 'Bad Bunny x Crocs',
+                    precio: '8,200',
+                    imagen: 'https://cdn.shopify.com/s/files/1/0433/0438/6709/products/091520Bad-LPproduct-D_590x.png?v=1601453279'
+                },*/
+
+
+
+            ];
+
+            let carrito = [];
+            let total = 0;
+            const DOMitems = document.querySelector('#items');
+            const DOMcarrito = document.querySelector('#carrito');
+            const DOMtotal = document.querySelector('#total');
+            const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+            const miLocalStorage = window.localStorage;
+
+            // Funciones
+
+            /**
+            * Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
+            */
+            function renderizarProductos() {
+                baseDeDatos.forEach((info) => {
+                    // Estructura
+                    const miNodo = document.createElement('div');
+                    miNodo.classList.add('card', 'col-sm-4');
+                    // Body
+                    const miNodoCardBody = document.createElement('div');
+                    miNodoCardBody.classList.add('card-body');
+                    // Titulo
+                    const miNodoTitle = document.createElement('h5');
+                    miNodoTitle.classList.add('card-title');
+                    miNodoTitle.textContent = info.nombre;
+                    // Imagen
+                    const miNodoImagen = document.createElement('img');
+                    miNodoImagen.classList.add('img-fluid');
+                    miNodoImagen.setAttribute('src', info.imagen);
+                    // Precio
+                    const miNodoPrecio = document.createElement('p');
+                    miNodoPrecio.classList.add('card-text');
+                    miNodoPrecio.textContent = info.precio.toLocaleString(undefined,{minimumFractionDigits:2}) + '€';
+                    // Boton 
+                    const miNodoBoton = document.createElement('button');
+                    miNodoBoton.classList.add('btn', 'btn-primary');
+                    miNodoBoton.textContent = '+';
+                    miNodoBoton.setAttribute('marcador', info.id);
+                    miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+                    // Insertamos
+                    miNodoCardBody.appendChild(miNodoImagen);
+                    miNodoCardBody.appendChild(miNodoTitle);
+                    miNodoCardBody.appendChild(miNodoPrecio);
+                    miNodoCardBody.appendChild(miNodoBoton);
+                    miNodo.appendChild(miNodoCardBody);
+                    DOMitems.appendChild(miNodo);
+                });
+            }
+
+            /**
+            * Evento para añadir un producto al carrito de la compra
+            */
+            function anyadirProductoAlCarrito(evento) {
+                // Anyadimos el Nodo a nuestro carrito
+                carrito.push(evento.target.getAttribute('marcador'))
+                // Calculo el total
+                calcularTotal();
+                // Actualizamos el carrito 
+                renderizarCarrito();
+                // Actualizamos el LocalStorage
+                guardarCarritoEnLocalStorage();
+            }
+
+            /**
+            * Dibuja todos los productos guardados en el carrito
+            */
+            function renderizarCarrito() {
+                // Vaciamos todo el html
+                DOMcarrito.textContent = '';
+                // Quitamos los duplicados
+                const carritoSinDuplicados = [...new Set(carrito)];
+                // Generamos los Nodos a partir de carrito
+                carritoSinDuplicados.forEach((item) => {
+                    // Obtenemos el item que necesitamos de la variable base de datos
+                    const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                        // ¿Coincide las id? Solo puede existir un caso
+                        return itemBaseDatos.id === parseInt(item);
+                    });
+                    // Cuenta el número de veces que se repite el producto
+                    const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                        // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+                        return itemId === item ? total += 1 : total;
+                    }, 0);
+                    // Creamos el nodo del item del carrito
+                    const miNodo = document.createElement('li');
+                    miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                    miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio.toLocaleString(undefined,{minimumFractionDigits:2})}$`;
+                    // Boton de borrar
+                    const miBoton = document.createElement('button');
+                    miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+                    miBoton.textContent = 'X';
+                    miBoton.style.marginLeft = '1rem';
+                    miBoton.dataset.item = item;
+                    miBoton.addEventListener('click', borrarItemCarrito);
+                    // Mezclamos nodos
+                    miNodo.appendChild(miBoton);
+                    DOMcarrito.appendChild(miNodo);
+                });
+            }
+
+            /**
+            * Evento para borrar un elemento del carrito
+            */
+            function borrarItemCarrito(evento) {
+                // Obtenemos el producto ID que hay en el boton pulsado
+                const id = evento.target.dataset.item;
+                // Borramos todos los productos
+                carrito = carrito.filter((carritoId) => {
+                    return carritoId !== id;
+                });
+                // volvemos a renderizar
+                renderizarCarrito();
+                // Calculamos de nuevo el precio
+                calcularTotal();
+                // Actualizamos el LocalStorage
+                guardarCarritoEnLocalStorage();
+
+            }
+
+            /**
+            * Calcula el precio total teniendo en cuenta los productos repetidos
+            */
+            function calcularTotal() {
+                // Limpiamos precio anterior
+                total = 0;
+                // Recorremos el array del carrito
+                carrito.forEach((item) => {
+                    // De cada elemento obtenemos su precio
+                    const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                        return itemBaseDatos.id === parseInt(item);
+                    });
+                    total = total + miItem[0].precio;
+                });
+                // Renderizamos el precio en el HTML
+                DOMtotal.textContent = total.toFixed(2);
+            }
+
+            /**
+            * Varia el carrito y vuelve a dibujarlo
+            */
+            function vaciarCarrito() {
+                // Limpiamos los productos guardados
+                carrito = [];
+                // Renderizamos los cambios
+                renderizarCarrito();
+                calcularTotal();
+                // Borra LocalStorage
+                localStorage.clear();
+
+            }
+
+            function guardarCarritoEnLocalStorage () {
+                miLocalStorage.setItem('carrito', JSON.stringify(carrito));
+            }
+
+            function cargarCarritoDeLocalStorage () {
+                // ¿Existe un carrito previo guardado en LocalStorage?
+                if (miLocalStorage.getItem('carrito') !== null) {
+                    // Carga la información
+                    carrito = JSON.parse(miLocalStorage.getItem('carrito'));
+                }
+            }
+
+            // Eventos
+            DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+
+            // Inicio
+            cargarCarritoDeLocalStorage();
+            renderizarProductos();
+            calcularTotal();
+            renderizarCarrito();
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- Elementos generados a partir del JSON -->
+            <main id="items" class="col-sm-8 row"></main>
+            <!-- Carrito -->
+            <aside class="col-sm-4">
+                <h2>Carrito</h2>
+                <!-- Elementos del carrito -->
+                <ul id="carrito" class="list-group"></ul>
+                <hr>
+                <!-- Precio total -->
+                <p class="text-right">Total: <span id="total"></span>&euro;</p>
+                <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>
