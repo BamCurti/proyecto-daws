@@ -8,7 +8,7 @@ const config = require('../config.js');
 
 const User = require('../schemas/user.js').User;
 const Article = require('../schemas/article.js').Article;
-const Bill = require('../schemas/Bill.js').Bill;
+const Bill = require('../schemas/bill.js').Bill;
 const Cart = require('../schemas/cart.js').Cart;
 const { query } = require('express');
 
