@@ -141,7 +141,20 @@ router.route('/api/articles')
     });
 
 router.route('/api/articles/:id')
-    .put();
+    .put(auth.isAdmin, (req, res) => {
+        const articleId = req.params.id;
+        const info = req.body;
+
+        Article.findOneAndUpdate({uid: articleId}, info, (errArticle, docArticle) => {
+            if(errArticle) return res.status(403).send("Cambio invalido");
+
+            res.set('Content-Type', 'application/json');
+            res.set('X-Auth', auth.createToken(info));
+            res.status(200).send(JSON.stringify(docArticle));
+            
+        })
+
+    });
 
 router.route('/api/cart/:id')
     .get(auth.isAuth, (req, res) => {
@@ -208,14 +221,80 @@ router.route('/api/bills/:idUser')
             return res.status(200).send(JSON.stringify(bills));
         })
     })
-    .post();
+    .post(auth.isAuth, (req, res) => {
+        const userId = req.params.idUser;
+        const info = req.body;
+
+        //verificar información
+
+        if(info.state == undefined ||
+            info.city == undefined || info.direction == undefined ||
+            info.cp == undefined || info.internNumber == undefined||
+            info.externNumber == undefined)
+            return res.status(403).send("Datos obligatorios no definidos");
+
+        const userQuery = User.where({uid: userId});
+        
+        //Buscar usuario para guardar todo
+        
+        userQuery.findOne((errUser, docUser) => {
+            if(errUser) return res.status(500).send("Error en la base de datos USUARIOS");
+            if(docUser == null) return res.status(404).send("Usuario no encontrado");
+
+            //Subir factura
+            info.uid = shortid.generate();
+            info.userId = userId;
+            info.cartId = docUser.cartId;
+
+            const newBill = Bill(info);
+            newBill.save((errBill, docBill) => {
+                if(errBill) {
+                    console.log(errBill);
+                    return res.status(500).send("Error al guardar la factura");
+                }
+
+                //Actualizar usuario
+                docUser.billList.push(info.uid);
+                docUser.cartId = shortid.generate();
+
+                let cart = new Cart({uid: docUser.cartId, content: {}});
+
+                cart.save((errCart, cartStored) => {
+                    if(errCart) return res.status(500).send("Error al crear nuevo carrito");
+                    
+                    User.findOneAndUpdate({uid: userId}, docUser, (errUpdate, docUpdate) => {
+                        if(errUpdate){ 
+                            return res.status(500).send("Error en la base de datos USUARIOS UPDATE");
+                        }
+    
+                        res.set('Content-Type', 'application/json');
+                        res.set('X-Auth', req.headers['x-auth']);           
+            
+                        return res.status(200).send(JSON.stringify(docBill));
+    
+                    });
+
+                })
+            })
+
+        } )
+        
+
+    });
 
 router.route('/api/bills/bill/:id')
     .get(auth.isAuth, (req, res) => {
-        const idUser = req.params.id;
-        const queryUser = User.where({uid: idUser});
+        const idBill = req.params.id;
+        const queryBill = Bill.where({uid: idBill});
+
+        queryBill.findOne((err, docBill) => {
+            if(err) return res.status(500).send('Error en el servidor');
+            if(docBill == null) return res.status(404).send('La factura no existe');
+
+            res.set('Content-Type', 'application/json');
+            res.set('X-Auth', req.headers['x-auth']);
+            return res.status(200).send(JSON.stringify(docBill));
+        })
     });
-
-
 
 module.exports = router;

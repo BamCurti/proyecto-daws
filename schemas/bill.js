@@ -12,12 +12,10 @@ let billSchema = new schema({
         default: shortid
     },
     cartId: {
-        unique: true,
         type: String,
         required: true
     },
     userId: {
-        unique: true,
         type: String,
         required: true
     },

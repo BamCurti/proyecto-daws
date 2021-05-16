@@ -14,7 +14,7 @@ function createToken(user) {
     const payload = {
         sub: user._id,
         iat: moment().unix(),
-        exp: moment().add(1, 'days').unix()
+        exp: moment().add(14, 'days').unix()
     }
 
     return jwt.encode(payload, config.SECRET_TOKEN);
@@ -59,6 +59,26 @@ if(payload.ENV == undefined || payload.EVC == undefined)
 
 console.log("Admin authorized");
 next();
+}
+
+function isBill(req, res, next) {
+    if(!req.headers['x-bill'])
+        return res.status(403).send('No es una factura');
+
+    const token = req.headers['x-bill'];
+    let payload;
+
+    try {
+        payload = jwt.decode(token, config.SECRET_TOKEN);
+    } catch (error) {
+        return res.status(403).send('Token erroneo')
+    }
+
+    if(payload.exp < moment().unix())
+        return res.status(401).send("El token ha expirado");
+
+    req.bill = payload.sub;
+    next();
 }
 
 exports.createToken = createToken;

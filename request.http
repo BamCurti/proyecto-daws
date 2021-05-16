@@ -4,8 +4,9 @@ Content-Type: application/json
 
 {
     "name": "Edgar Vallejo Curti",
-    "email": "is725762@iteso.mx",
-    "password": "password"
+    "email": "is72576@iteso.mx",
+    "password": "password",
+    "foo": "bar"
 }
 
 ###
@@ -37,8 +38,8 @@ X-Admin: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFVkMiOiJpczcyNTc2MiIsIkVOViI6Im
 {
     "inStock": 666,
     "price": 1999,
-    "description": "Adidas Forum Low",
-    "image": "https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy/09c5ea6df1bd4be6baaaac5e003e7047_9366/Tenis_Forum_Low_Blanco_FY7756_01_standard.jpg"
+    "description": "test",
+    "image": ""
 }
 
 ###
@@ -55,7 +56,8 @@ X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjY3NzIsImV4cCI6MTY
 
 {
   "content": {
-      "4cBeLPzUC": 1
+      "4cBeLPzUC": 1,
+      "GWAl1ZlYs": 2
   }
 }
 
@@ -64,4 +66,30 @@ X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjY3NzIsImV4cCI6MTY
 GET http://localhost:3000/api/bills/GDZYq8es8
 Content-Type: application/json
 X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjY3NzIsImV4cCI6MTYyMTIxMzE3Mn0.Ww0olsOoajC93dpZ_u7NqslK7aA10Px3wVkxeBuWwIQ 
+
+###
+POST http://localhost:3000/api/bills/GDZYq8es8
+Content-Type: application/json
+X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjY3NzIsImV4cCI6MTYyMTIxMzE3Mn0.Ww0olsOoajC93dpZ_u7NqslK7aA10Px3wVkxeBuWwIQ 
+
+{
+    "state": "JAL",
+    "city": "Zapopan",
+    "direction": "Paseo de las caobas",
+    "cp": 45188,
+    "internNumber": "104",
+    "externNumber": "3320"
+}
+
+###
+
+PUT http://localhost:3000/api/articles/9ZRfyG5LS
+Content-Type: application/json
+X-Admin: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFVkMiOiJpczcyNTc2MiIsIkVOViI6ImlzNzE1MTU1In0.Y9A6bo3Nesum5EslwIC4ib8STGRVQpMB_6qA2llXc4o
+
+{
+    "inStock": 69,
+    "price": 30,
+    "description": "Test put article"
+}
 
