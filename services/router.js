@@ -10,6 +10,7 @@ const User = require('../schemas/user.js').User;
 const Article = require('../schemas/article.js').Article;
 const Bill = require('../schemas/Bill.js').Bill;
 const Cart = require('../schemas/cart.js').Cart;
+const { query } = require('express');
 
 
 mongoose.connect(config.db, {useNewUrlParser: true});
@@ -168,7 +169,27 @@ router.route('/api/cart/:id')
         });
 
     })
-    .put();
+    .put(auth.isAuth, (req, res) => {
+        const queryUser = User.where({uid: req.params.id});
+        queryUser.findOne((err, doc) => {
+            if(err) return res.status(500).send('Error en el servidor buscando al usuario');
+            if(doc == null) return res.status(404).send("Usuario no encontrado");
+
+            const cartId = doc.cartId;
+            const newContent = req.body.content;
+
+            console.log(cartId);
+
+            Cart.findOneAndUpdate({uid: cartId}, {content: newContent}, (errCart, doc) => {
+                if(errCart){ 
+                    return res.status(500).send('Error en el servidor al carrito');
+                }                
+                res.set('Content-Type', 'application/json');
+                res.set('X-Auth', req.headers['x-auth']);
+                return res.status(200).send(JSON.stringify(doc));
+            });
+        });
+    });
 
 router.route('/api/bills/:idUser')
     .get()

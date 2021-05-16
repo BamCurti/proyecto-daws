@@ -12,7 +12,7 @@ let cartSchema = new schema({
     },
     content: {
         type: Map,
-        of: Number
+        of: String
     }
 
 }, {collection: 'carts'});

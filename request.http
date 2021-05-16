@@ -22,7 +22,7 @@ Content-Type: application/json
 
 GET http://localhost:3000/api/users/is725762@iteso.mx
 Content-Type: application/json
-X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjM5MzUsImV4cCI6MTYyMTIxMDMzNX0.WSzKGM5X_r76qJgKDQtL8quaXVkHZI78wO64ow6p16s
+X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjY3NzIsImV4cCI6MTYyMTIxMzE3Mn0.Ww0olsOoajC93dpZ_u7NqslK7aA10Px3wVkxeBuWwIQ
 
 ###
 
@@ -43,19 +43,18 @@ X-Admin: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFVkMiOiJpczcyNTc2MiIsIkVOViI6Im
 
 ###
 
-GET http://localhost:3000/api/cart/2LySlWp3P
+GET http://localhost:3000/api/cart/GDZYq8es8
 Content-Type: application/json
-X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjM5MzUsImV4cCI6MTYyMTIxMDMzNX0.WSzKGM5X_r76qJgKDQtL8quaXVkHZI78wO64ow6p16s
+X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjY3NzIsImV4cCI6MTYyMTIxMzE3Mn0.Ww0olsOoajC93dpZ_u7NqslK7aA10Px3wVkxeBuWwIQ
 
 ###
 
-PUT http://localhost:3000/api/cart/2LySlWp3P
+PUT http://localhost:3000/api/cart/GDZYq8es8
 Content-Type: application/json
-X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMTY1NzQsImV4cCI6MTYyMTIwMjk3NH0.daJYNGDY3nLhLgx52Hb2AZHyXvgyIW8gaVyvsmlcA8o
- 
+X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjY3NzIsImV4cCI6MTYyMTIxMzE3Mn0.Ww0olsOoajC93dpZ_u7NqslK7aA10Px3wVkxeBuWwIQ 
+
 {
-  "_id": "60a0633a9ab37251c810a965",
-  "uid": "zCiGktyPvq",
-  "content": {},
-  "__v": 0
+  "content": {
+      "4cBeLPzUC": 1
+  }
 }
