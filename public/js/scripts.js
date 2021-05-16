@@ -1,15 +1,31 @@
-/*!
-* Start Bootstrap - Shop Homepage v4.3.0 (https://startbootstrap.com/template/shop-homepage)
-* Copyright 2013-2021 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
-*/
-// This file is intentionally blank
-// Use this file to add JavaScript to your project
+"use strict";
 
-let carrito = [];
-let total = 0;
-const DOMitems = document.querySelector('#items');
-const DOMcarrito = document.querySelector('#carrito');
-const DOMtotal = document.querySelector('#total');
-const DOMbotonVaciar = document.querySelector('#boton-vaciar');
-const miLocalStorage = window.localStorage;
+const btnRegister = document.getElementById('btnRegister');
+
+//Registrar usuario
+btnRegister.addEventListener('click', () => {
+    event.preventDefault();
+    const name = document.getElementById('registerName');
+    const email = document.getElementById('registerEmail');
+    const password = document.getElementById('registerPassword');
+    const confirmPassword = document.getElementById('registerConfirmPassword');
+
+    if(password.value != confirmPassword.value)
+        return alert('No coinciden las contraseñas');
+
+    let req = new XMLHttpRequest();
+    req.open('POST', "https://daws-eshop.herokuapp.com/api/users");
+    req.setRequestHeader('Content-Type', 'application/json');
+
+    req.send(JSON.stringify({
+        name: name.value,
+        email: email.value,
+        password: password.value
+    }))
+
+    req.onload = () => {
+        if(req.status === 201) alert("El usuario ha sido creado exitosamente");
+        if(req.status === 401) alert("El usuario ya existe");
+    }
+
+})

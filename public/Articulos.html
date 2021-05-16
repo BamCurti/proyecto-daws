@@ -435,38 +435,24 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="POST">
+                    <form action="" id="formRegister">
                         <div class="contenedor-input">
-                        <input type="text" placeholder="Nombre" name="Nombre">
-                        </div>
-                        <div class="contenedor-input">                           
-                            <input type="text" name="apellido" placeholder="Apellidos">
+                        <input type="text" placeholder="Nombre" name="registerName" id="registerName">
                         </div>
                         <div class="contenedor-input">
-                            <input type="email"  name="email" placeholder="Tu correo">
+                            <input type="email"  name="registerEmail" id="registerEmail" placeholder="Tu correo">
                         </div>
                         <div class="contenedor-input">
-                            <input type="password"  name="pws" placeholder="Ingrese contraseña">
+                            <input type="password"  name="registerPassword" id="registerPassword" placeholder="Ingrese contraseña">
                         </div>
                         <div class="contenedor-input">
-                            <input type="password" name="pws" placeholder="Confirmar contraseña">
-                        </div>
-                        <div class="contenedor-input">
-                            <input type="date" name="fecha" max="2021-12-31" min="1998-04-07" step="2">
-                        </div>
-                        <div class="contenedor-input">
-                            <input type="radio" id="male" name="gender" value="male">
-                            <label for="male">Male</label><br>
-                            <input type="radio" id="female" name="gender" value="female">
-                            <label for="female">Female</label><br>
-                            <input type="radio" id="other" name="gender" value="other">
-                            <label for="other">Other</label>
+                            <input type="password" name="registerConfirmPassword" id="registerConfirmPassword" placeholder="Confirmar contraseña">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" href="#Articulos2.html">Registrarse</button>
+                    <button type="submit" class="btn btn-primary" id="btnRegister">Registrarse</button>
                 </div>
                 <hr class="my-2">
             </div>

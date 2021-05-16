@@ -50,7 +50,7 @@ router.route('/api/users')
        
         user.save((err, userStored) => {
             if(err) {
-                res.status(401).send('Error en la base de datos');
+                res.status(403).send('Error en la base de datos');
                 return;
             }
             res.set('Content-Type', 'application/json');
