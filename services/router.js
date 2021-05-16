@@ -142,6 +142,20 @@ router.route('/api/articles')
     });
 
 router.route('/api/articles/:id')
+    .get((req, res) => {
+        const articleId = req.params.id;
+
+        Article.findOne({uid: articleId}, (err, doc) => {
+            if(err) return res.status(500).send("Error en el servidor");
+            if(doc == null) return res.status(404).send("No existe producto");
+            
+            res.set('Content-Type', 'application/json');
+            res.status(200).send(JSON.stringify(doc));
+
+        })
+
+    } 
+    )
     .put(auth.isAdmin, (req, res) => {
         const articleId = req.params.id;
         const info = req.body;
