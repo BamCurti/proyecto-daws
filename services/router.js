@@ -85,8 +85,9 @@ router.route('/api/login')
             }
 
             res.set('Content-Type', 'application/json');
-            res.set('X-Auth', auth.createToken(info));
-            res.status(200).send('Login exitoso');
+            res.status(200).send(JSON.stringify({
+                XToken: auth.createToken(info)
+            }));
         })
     });
 

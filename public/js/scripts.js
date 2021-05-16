@@ -1,6 +1,10 @@
 "use strict";
 
+const serverLink = "https://daws-eshop.herokuapp.com";
+
 const btnRegister = document.getElementById('btnRegister');
+const btnLogin = document.getElementById('btnLogin');
+
 
 //Registrar usuario
 btnRegister.addEventListener('click', () => {
@@ -24,8 +28,38 @@ btnRegister.addEventListener('click', () => {
     }))
 
     req.onload = () => {
-        if(req.status === 201) alert("El usuario ha sido creado exitosamente");
-        if(req.status === 401) alert("El usuario ya existe");
+        if(req.status === 201) {
+            alert("El usuario ha sido creado exitosamente");
+            window.location.href = "https://daws-eshop.herokuapp.com/Articulos.html";
+        }
+        if(req.status === 403) alert("El usuario ya existe");
     }
+})
+
+//Login
+btnLogin.addEventListener('click', () => {
+    event.preventDefault();
+
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    const req = new XMLHttpRequest();
+    req.open('POST', serverLink + "/api/login");
+    req.setRequestHeader('Content-Type', 'application/json');
+
+    req.send(JSON.stringify({
+        email: email,
+        password: password
+    }));
+
+    req.onload = () => {
+        if(req.status === 404) return alert("El usuario no existe");
+        if(req.status === 401) return alert("Contraseña erronea");
+        if(req.status === 200)  {
+            alert("Login exitoso");
+            console.log(req.getResponseHeader("x-auth"));
+        }
+    }
+
 
 })
