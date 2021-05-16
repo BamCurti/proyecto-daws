@@ -58,3 +58,10 @@ X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjY3NzIsImV4cCI6MTY
       "4cBeLPzUC": 1
   }
 }
+
+###
+
+GET http://localhost:3000/api/bills/GDZYq8es8
+Content-Type: application/json
+X-Auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjExMjY3NzIsImV4cCI6MTYyMTIxMzE3Mn0.Ww0olsOoajC93dpZ_u7NqslK7aA10Px3wVkxeBuWwIQ 
+

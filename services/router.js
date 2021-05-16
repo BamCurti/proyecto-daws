@@ -192,11 +192,29 @@ router.route('/api/cart/:id')
     });
 
 router.route('/api/bills/:idUser')
-    .get()
+    .get(auth.isAuth, (req, res) => {
+        const idUser = req.params.idUser;
+        const queryUser = User.where({uid: idUser});
+
+        queryUser.findOne((errUser, docUser) => {
+            if(errUser) return res.status(500).send("Error en la base de datos");
+            if(docUser == null) return res.status(404).send("Usuario no encontrado");
+
+            const bills = docUser.billList;
+
+            res.set('Content-Type', 'application/json');
+            res.set('X-Auth', req.headers['x-auth']);           
+
+            return res.status(200).send(JSON.stringify(bills));
+        })
+    })
     .post();
 
 router.route('/api/bills/bill/:id')
-    .get();
+    .get(auth.isAuth, (req, res) => {
+        const idUser = req.params.id;
+        const queryUser = User.where({uid: idUser});
+    });
 
 
 

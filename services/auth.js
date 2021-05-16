@@ -25,7 +25,13 @@ function isAuth(req, res, next) {
         return res.status(403).send('No tienes autorización');
     }
     const token = req.headers['x-auth'];
-    const payload = jwt.decode(token, config.SECRET_TOKEN);
+
+    let payload;
+    try {
+        payload = jwt.decode(token, config.SECRET_TOKEN);        
+    } catch (error) {
+        return res.status(403).send('Token erroneo');
+    }
 
     if(payload.exp < moment().unix())
         return res.status(401).send("El token ha expirado");
@@ -40,7 +46,13 @@ function isAdmin(req, res, next) {
     return res.status(403).send('No tienes autorización');
     
 const token = req.headers['x-admin'];
-const payload = jwt.decode(token, config.SECRET_TOKEN);
+let payload;
+
+try {
+    payload = jwt.decode(token, config.SECRET_TOKEN);
+} catch (error) {
+    return res.status(403).send("Token erroneo");
+}
 
 if(payload.ENV == undefined || payload.EVC == undefined)
     return res.status(403).send('No tienes autorización');
