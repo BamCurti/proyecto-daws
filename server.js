@@ -3,8 +3,8 @@
 const express = require('express');
 const router = require('./services/router.js');
 const app = express();
-const port = 3000;
 const cors = require('cors');
+const config = require('./config.js');
 
 app.use(cors({origin: ['http://127.0.0.1:5000']}));
 
@@ -18,6 +18,6 @@ app.get('/', (req, res) => {
 })
 
 
-app.listen(port, function() {
+app.listen(config.port, function() {
     console.log(`Example app listening on port ${port}!`);
 });
