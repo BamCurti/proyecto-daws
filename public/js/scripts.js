@@ -81,9 +81,9 @@ function getAllArticles() {
 function articleToHTML(article) {
     return `<div class="col-lg-4 col-md-6 mb-4">
     <div class="card h-100">
-        <a href="${serverLink + "/api/articles/" + article.uid}"><img class="card-img-top" src="${article.image}" alt="..." /></a>
+        <a href="${serverLink + "/article.html?uid=" + article.uid}"><img class="card-img-top" src="${article.image}" alt="..." /></a>
         <div class="card-body">
-            <h4 class="card-title"><a href="#!" data-toggle="modal" data-target="#OGRed">${article.description}</a></h4>
+            <h4 class="card-title"><a href="#!" data-toggle="modal" data-target="#modalArticle">${article.description}</a></h4>
             <h5>$${article.price}</h5>
         </div>
         
