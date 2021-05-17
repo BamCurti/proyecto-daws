@@ -86,6 +86,8 @@ function articleToHTML(article) {
             <h4 class="card-title"><a href="#!" data-toggle="modal" data-target="#modalArticle">${article.description}</a></h4>
             <h5>$${article.price}</h5>
         </div>
+
+        <button id="btnAddCarrito" onclick="addToCarrito("${article.uid}")" value="run scripts javascript"></button>
         
     </div>
 </div>`;
@@ -93,6 +95,10 @@ function articleToHTML(article) {
 
 function articleListToHTML(list) {
     document.getElementById("allArticles").innerHTML = list.map(article => articleToHTML(article)).toString();
+}
+
+function addToCarrito(id) {
+
 }
 
 getAllArticles()
